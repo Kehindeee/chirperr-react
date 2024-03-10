@@ -26,7 +26,7 @@ Route::get('/', function () {
 });
 
 Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'store','update','destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
@@ -38,5 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::mailPreview();
 
 require __DIR__.'/auth.php';
